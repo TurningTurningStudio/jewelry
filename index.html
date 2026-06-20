@@ -1,240 +1,654 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Turning Turning Studio Jewelry</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<style>
-body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-.w3-third img{margin-bottom: -6px; opacity: 0.8; cursor: pointer}
-.w3-third img:hover{opacity: 1}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turning Turning Studio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --cream: #ece1c9;
+            --gold: #cfa96f;
+            --terracotta: #bd5b30;
+            --mahogany: #793b2b;
+            --olive-brown: #514c34;
+            --espresso: #342b22;
+
+            --shadow: 0 10px 30px rgba(52, 43, 34, 0.12);
+            --shadow-hover: 0 18px 40px rgba(52, 43, 34, 0.18);
+            --radius: 16px;
+            --transition: 0.3s ease;
+            --max-width: 1400px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--cream);
+            color: var(--olive-brown);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(92%, var(--max-width));
+            margin: 0 auto;
+        }
+
+        /* ==========================
+           HEADER
+        ========================== */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(236, 225, 201, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(81, 76, 52, 0.12);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--espresso);
+            letter-spacing: 0.03em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--olive-brown);
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--terracotta);
+        }
+
+        /* ==========================
+           HERO
+        ========================== */
+
+        .hero {
+            padding: 6rem 0 4rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--espresso);
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 0.95;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin-bottom: 2rem;
+        }
+
+        .button {
+            display: inline-block;
+            background: var(--terracotta);
+            color: white;
+            padding: 0.9rem 1.5rem;
+            border-radius: 999px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .button:hover {
+            background: var(--mahogany);
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-image img {
+            height: 500px;
+            object-fit: cover;
+        }
+
+        /* ==========================
+           SECTIONS
+        ========================== */
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--espresso);
+            font-size: clamp(2rem, 5vw, 3rem);
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 70px;
+            height: 2px;
+            background: var(--gold);
+            margin-top: 0.8rem;
+        }
+
+        /* ==========================
+           GALLERY
+        ========================== */
+
+        .gallery-grid {
+            columns: 1;
+            column-gap: 1.25rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            margin-bottom: 1.25rem;
+            break-inside: avoid;
+            cursor: pointer;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            display: block;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(52, 43, 34, 0.85),
+                transparent
+            );
+            display: flex;
+            align-items: flex-end;
+            padding: 1.2rem;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h3 {
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* ==========================
+           ABOUT
+        ========================== */
+
+        .about-card {
+            background: rgba(255,255,255,0.45);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-grid {
+            display: grid;
+        }
+
+        .about-image img {
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-content {
+            padding: 2rem;
+        }
+
+        .about-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--espresso);
+            margin-bottom: 1rem;
+        }
+
+        /* ==========================
+           CONTACT
+        ========================== */
+
+        .contact-card {
+            background: rgba(255,255,255,0.45);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            border: 1px solid rgba(81, 76, 52, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            background: rgba(255,255,255,0.8);
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        textarea {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+        }
+
+        /* ==========================
+           FOOTER
+        ========================== */
+
+        footer {
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--olive-brown);
+            border-top: 1px solid rgba(81, 76, 52, 0.12);
+        }
+
+        /* ==========================
+           LIGHTBOX
+        ========================== */
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            z-index: 1000;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 900px;
+            width: 100%;
+            position: relative;
+        }
+
+        .lightbox img {
+            border-radius: 12px;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        .lightbox-info {
+            color: white;
+            margin-top: 1rem;
+        }
+
+        .close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* ==========================
+           RESPONSIVE
+        ========================== */
+
+        @media (min-width: 700px) {
+            .gallery-grid {
+                columns: 2;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .about-grid {
+                grid-template-columns: 350px 1fr;
+            }
+        }
+
+        @media (min-width: 1100px) {
+            .gallery-grid {
+                columns: 3;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 4rem;
+            }
+
+            .hero-image img {
+                height: 350px;
+            }
+        }
+    </style>
 </head>
-<body class="w3-light-grey w3-content" style="max-width:1600px">
+<body>
 
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-bar-block w3-white w3-animate-left w3-text-grey w3-collapse w3-top w3-center" style="z-index:3;width:300px;font-weight:bold" id="mySidebar"><br>
-  <h3 class="w3-padding-64 w3-center"><b>Turning<br>Turning<br>Studio<br>Jewelry</b></h3>
-  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hide-large">CLOSE</a>
-  <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">PORTFOLIO</a> 
-  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT ME</a> 
-  <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
-</nav>
+<header>
+    <div class="container">
+        <nav>
+            <div class="logo">Turning Turning Studio</div>
 
-<!-- Top menu on small screens -->
-<header class="w3-container w3-top w3-hide-large w3-white w3-xlarge w3-padding-16">
-  <span class="w3-left w3-padding">TURNING TURNING STUDIO JEWELRY</span>
-  <a href="javascript:void(0)" class="w3-right w3-button w3-white" onclick="w3_open()">☰</a>
+            <div class="nav-links">
+                <a href="#gallery">Gallery</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </div>
 </header>
 
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+<section class="hero">
+    <div class="container">
+        <div class="hero-grid">
 
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:300px">
+            <div class="hero-text">
+                <h1>Turning Turning Studio</h1>
 
-  <!-- Push down content on small screens --> 
-  <div class="w3-hide-large" style="margin-top:83px"></div>
-  
-  <!-- Photo grid -->
-  <div class="w3-row">
-    <div class="w3-third">
-      <img src="images/cone.jpg" style="width:100%" onclick="onClick(this)" alt="A boy surrounded by beautiful nature">
-      <img src="/w3images/girl_mountain.jpg" style="width:100%" onclick="onClick(this)" alt="What a beautiful scenery this sunset">
-      <img src="/w3images/girl.jpg" style="width:100%" onclick="onClick(this)" alt="The Beach. Me. Alone. Beautiful">
-    </div>
+                <p>
+                    Handmade earrings inspired by nature, folklore,
+                    old gold, strange colors, and the occasional
+                    completely unhinged neon idea.
+                </p>
 
-    <div class="w3-third">
-      <img src="/w3images/boy.jpg" style="width:100%" onclick="onClick(this)" alt="Quiet day at the beach. Cold, but beautiful">
-      <img src="/w3images/man_bench.jpg" style="width:100%" onclick="onClick(this)" alt="Waiting for the bus in the desert">
-      <img src="/w3images/natureboy.jpg" style="width:100%" onclick="onClick(this)" alt="Nature again.. At its finest!">
-    </div>
-    
-    <div class="w3-third">
-      <img src="/w3images/girl.jpg" style="width:100%" onclick="onClick(this)" alt="Canoeing again">
-      <img src="/w3images/girl_train.jpg" style="width:100%" onclick="onClick(this)" alt="A girl, and a train passing">
-      <img src="/w3images/closegirl.jpg" style="width:100%" onclick="onClick(this)" alt="What a beautiful day!">
-    </div>
-  </div>
+                <a href="#gallery" class="button">
+                    Browse Collection
+                </a>
+            </div>
 
-  <!-- Pagination -->
-  <div class="w3-center w3-padding-32">
-    <div class="w3-bar">
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-      <a href="#" class="w3-bar-item w3-black w3-button">1</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
-    </div>
-  </div>
-  
-  <!-- Modal for full size images on click-->
-  <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
-    <span class="w3-button w3-black w3-xlarge w3-display-topright">×</span>
-    <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
-      <img id="img01" class="w3-image">
-      <p id="caption"></p>
-    </div>
-  </div>
+            <div class="hero-image">
+                <img src="images/featured.jpg" alt="Featured jewelry piece">
+            </div>
 
-  <!-- About section -->
-  <div class="w3-container w3-dark-grey w3-center w3-text-light-grey w3-padding-32" id="about">
-    <h4><b>About Me</b></h4>
-    <img src="/w3images/avatar_hat.jpg" alt="Me" class="w3-image w3-padding-32" width="600" height="650">
-    <div class="w3-content w3-justify" style="max-width:600px">
-      <h4>My Name</h4>
-      <p>Some text about me. I love taking photos of PEOPLE. I am lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-      </p>
-      <p>mail: example@example.com</p>
-      <p>tel: 5353 35531</p>
-      <hr class="w3-opacity">
-      <h4 class="w3-padding-16">Technical Skills</h4>
-      <p class="w3-wide">Photography</p>
-      <div class="w3-white">
-        <div class="w3-container w3-padding-small w3-center w3-grey" style="width:95%">95%</div>
-      </div>
-      <p class="w3-wide">Web Design</p>
-      <div class="w3-white">
-        <div class="w3-container w3-padding-small w3-center w3-grey" style="width:85%">85%</div>
-      </div>
-      <p class="w3-wide">Photoshop</p>
-      <div class="w3-white">
-        <div class="w3-container w3-padding-small w3-center w3-grey" style="width:80%">80%</div>
-      </div>
-      <p><button class="w3-button w3-light-grey w3-padding-large w3-margin-top w3-margin-bottom">Download Resume</button></p>
-      <hr class="w3-opacity">
-
-      <h4 class="w3-padding-16">How much I charge</h4>
-      <div class="w3-row-padding" style="margin:0 -16px">
-        <div class="w3-half w3-margin-bottom">
-          <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off">
-            <li class="w3-black w3-xlarge w3-padding-32">Basic</li>
-            <li class="w3-padding-16">Web Design</li>
-            <li class="w3-padding-16">Photography</li>
-            <li class="w3-padding-16">5GB Storage</li>
-            <li class="w3-padding-16">Mail Support</li>
-            <li class="w3-padding-16">
-              <h2>$ 10</h2>
-              <span class="w3-opacity">per month</span>
-            </li>
-            <li class="w3-light-grey w3-padding-24">
-              <button class="w3-button w3-white w3-padding-large">Sign Up</button>
-            </li>
-          </ul>
         </div>
-        
-        <div class="w3-half">
-          <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off">
-            <li class="w3-black w3-xlarge w3-padding-32">Pro</li>
-            <li class="w3-padding-16">Web Design</li>
-            <li class="w3-padding-16">Photography</li>
-            <li class="w3-padding-16">50GB Storage</li>
-            <li class="w3-padding-16">Endless Support</li>
-            <li class="w3-padding-16">
-              <h2>$ 25</h2>
-              <span class="w3-opacity">per month</span>
-            </li>
-            <li class="w3-light-grey w3-padding-24">
-              <button class="w3-button w3-white w3-padding-large">Sign Up</button>
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
-  </div>
+</section>
 
-  <!-- Contact section -->
-  <div class="w3-container w3-light-grey w3-padding-32 w3-padding-large" id="contact">
-    <div class="w3-content" style="max-width:600px">
-      <h4 class="w3-center"><b>Contact Me</b></h4>
-      <p>Do you want me to photograph you? Fill out the form and fill me in with the details :) I love meeting new people!</p>
-      <form action="/action_page.php" target="_blank">
-        <div class="w3-section">
-          <label>Name</label>
-          <input class="w3-input w3-border" type="text" name="Name" required>
+<section id="gallery">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Gallery</h2>
         </div>
-        <div class="w3-section">
-          <label>Email</label>
-          <input class="w3-input w3-border" type="text" name="Email" required>
+
+        <div class="gallery-grid">
+
+            <div class="gallery-item"
+                 data-title="Forest Glass"
+                 data-description="Czech glass beads with gold accents."
+                 data-image="images/item1.jpg">
+                <img src="images/item1.jpg" alt="">
+                <div class="gallery-overlay">
+                    <h3>Forest Glass</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item"
+                 data-title="Golden Fern"
+                 data-description="Nature-inspired statement earrings."
+                 data-image="images/item2.jpg">
+                <img src="images/item2.jpg" alt="">
+                <div class="gallery-overlay">
+                    <h3>Golden Fern</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item"
+                 data-title="Neon Ritual"
+                 data-description="Because sometimes subtlety is overrated."
+                 data-image="images/item3.jpg">
+                <img src="images/item3.jpg" alt="">
+                <div class="gallery-overlay">
+                    <h3>Neon Ritual</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item"
+                 data-title="Moss & Brass"
+                 data-description="Earthy greens and warm metallics."
+                 data-image="images/item4.jpg">
+                <img src="images/item4.jpg" alt="">
+                <div class="gallery-overlay">
+                    <h3>Moss & Brass</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item"
+                 data-title="Night Bloom"
+                 data-description="A darker floral-inspired design."
+                 data-image="images/item5.jpg">
+                <img src="images/item5.jpg" alt="">
+                <div class="gallery-overlay">
+                    <h3>Night Bloom</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item"
+                 data-title="Sunlit Amber"
+                 data-description="Warm golds and amber tones."
+                 data-image="images/item6.jpg">
+                <img src="images/item6.jpg" alt="">
+                <div class="gallery-overlay">
+                    <h3>Sunlit Amber</h3>
+                </div>
+            </div>
+
         </div>
-        <div class="w3-section">
-          <label>Message</label>
-          <input class="w3-input w3-border" type="text" name="Message" required>
-        </div>
-        <button type="submit" class="w3-button w3-block w3-black w3-margin-bottom">Send Message</button>
-      </form>
     </div>
-  </div>
+</section>
 
-  <!-- Footer -->
-  <footer class="w3-container w3-padding-32 w3-grey">  
-    <div class="w3-row-padding">
-      <div class="w3-third">
-        <h3>INFO</h3>
-        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>      
-      </div>
-    
-      <div class="w3-third">
-        <h3>BLOG POSTS</h3>
-        <ul class="w3-ul">
-          <li class="w3-padding-16 w3-hover-black">
-            <img src="/w3images/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
-            <span class="w3-large">Lorem</span><br>
-            <span>Sed mattis nunc</span>
-          </li>
-          <li class="w3-padding-16 w3-hover-black">
-            <img src="/w3images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
-            <span class="w3-large">Ipsum</span><br>
-            <span>Praes tinci sed</span>
-          </li> 
-        </ul>
-      </div>
+<section id="about">
+    <div class="container">
 
-      <div class="w3-third">
-        <h3>POPULAR TAGS</h3>
-        <p>
-          <span class="w3-tag w3-black w3-margin-bottom">Travel</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">New York</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">London</span>
-          <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">IKEA</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">NORWAY</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">DIY</span>
-          <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Ideas</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Baby</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Family</span>
-          <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">News</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Clothing</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Shopping</span>
-          <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Sports</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Games</span>
-        </p>
-      </div>
+        <div class="section-title">
+            <h2>About the Artist</h2>
+        </div>
+
+        <div class="about-card">
+            <div class="about-grid">
+
+                <div class="about-image">
+                    <img src="images/artist.jpg" alt="Artist portrait">
+                </div>
+
+                <div class="about-content">
+                    <h3>Hello There</h3>
+
+                    <p>
+                        Replace this section with your own artist bio.
+                        Talk about your inspiration, your creative process,
+                        where your materials come from, and what draws you
+                        toward handmade jewelry.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        Turning Turning Studio blends natural textures,
+                        warm metals, earthy palettes, gothic influences,
+                        and occasional flashes of joyful chaos into
+                        one-of-a-kind wearable pieces.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
     </div>
-  </footer>
-  
-  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+</section>
 
-<!-- End page content -->
+<section id="contact">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Contact</h2>
+        </div>
+
+        <div class="contact-card">
+
+            <!-- Replace form action later -->
+            <form>
+
+                <input
+                    type="text"
+                    placeholder="Your Name"
+                >
+
+                <input
+                    type="email"
+                    placeholder="Email Address"
+                >
+
+                <textarea
+                    placeholder="Message"></textarea>
+
+                <button
+                    type="submit"
+                    class="button">
+                    Send Message
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        © 2026 Turning Turning Studio
+    </div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+
+    <div class="lightbox-content">
+
+        <span class="close">&times;</span>
+
+        <img id="lightboxImage" src="" alt="">
+
+        <div class="lightbox-info">
+            <h3 id="lightboxTitle"></h3>
+            <p id="lightboxDescription"></p>
+        </div>
+
+    </div>
+
 </div>
 
 <script>
-// Script to open and close sidebar
-function w3_open() {
-  document.getElementById("mySidebar").style.display = "block";
-  document.getElementById("myOverlay").style.display = "block";
-}
- 
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-  document.getElementById("myOverlay").style.display = "none";
-}
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    const lightboxDescription = document.getElementById('lightboxDescription');
+    const closeButton = document.querySelector('.close');
 
-// Modal Image Gallery
-function onClick(element) {
-  document.getElementById("img01").src = element.src;
-  document.getElementById("modal01").style.display = "block";
-  var captionText = document.getElementById("caption");
-  captionText.innerHTML = element.alt;
-}
+    galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
 
+            lightboxImage.src = item.dataset.image;
+            lightboxTitle.textContent = item.dataset.title;
+            lightboxDescription.textContent = item.dataset.description;
+
+            lightbox.classList.add('active');
+        });
+    });
+
+    closeButton.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('active');
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            lightbox.classList.remove('active');
+        }
+    });
 </script>
-
 
 </body>
 </html>
