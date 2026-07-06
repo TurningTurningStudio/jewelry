@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,8 +19,8 @@
             --olive-brown: #514c34;
             --espresso: #342b22;
 
-            --shadow: 0 10px 30px rgba(52, 43, 34, 0.12);
-            --shadow-hover: 0 18px 40px rgba(52, 43, 34, 0.18);
+            --shadow: none;
+            --shadow-hover: none;
             --radius: 16px;
             --transition: 0.3s ease;
             --max-width: 1400px;
@@ -29,6 +30,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-shadow: none !important;
         }
 
         html {
@@ -108,9 +110,7 @@
         }
 
         .hero-grid {
-            display: grid;
-            gap: 2rem;
-            align-items: center;
+            max-width: 760px;
         }
 
         .hero-text h1 {
@@ -140,17 +140,6 @@
         .button:hover {
             background: var(--mahogany);
             transform: translateY(-2px);
-        }
-
-        .hero-image {
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .hero-image img {
-            height: 500px;
-            object-fit: cover;
         }
 
         /* ==========================
@@ -368,10 +357,6 @@
                 columns: 2;
             }
 
-            .hero-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
             .about-grid {
                 grid-template-columns: 350px 1fr;
             }
@@ -392,9 +377,6 @@
                 padding-top: 4rem;
             }
 
-            .hero-image img {
-                height: 350px;
-            }
         }
     </style>
 </head>
@@ -430,10 +412,6 @@
                 <a href="#gallery" class="button">
                     Browse Collection
                 </a>
-            </div>
-
-            <div class="hero-image">
-                <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/main/images/quilt.jpg" alt="Featured jewelry piece">
             </div>
 
         </div>
