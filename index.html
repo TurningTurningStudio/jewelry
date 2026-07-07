@@ -12,25 +12,25 @@
 
     <style>
         :root {
-            --cream: #ece1c9;
-            --gold: #cfa96f;
-            --terracotta: #bd5b30;
-            --mahogany: #793b2b;
-            --olive-brown: #514c34;
-            --espresso: #342b22;
-
-            --shadow: none;
-            --shadow-hover: none;
-            --radius: 16px;
-            --transition: 0.3s ease;
-            --max-width: 1400px;
+            --paper: #f6f0e4;
+            --paper-deep: #e7dac6;
+            --ink: #211f1b;
+            --soft-ink: #575044;
+            --wine: #7a2637;
+            --moss: #55614a;
+            --blue: #2f5664;
+            --brass: #a36f2b;
+            --wood-wash: #d8b88f;
+            --wood-line: rgba(90, 52, 27, 0.075);
+            --line: rgba(33, 31, 27, 0.18);
+            --max-width: 1180px;
+            --ease: 260ms ease;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-shadow: none !important;
         }
 
         html {
@@ -38,10 +38,24 @@
         }
 
         body {
-            background: var(--cream);
-            color: var(--olive-brown);
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 14% 8%, rgba(122, 38, 55, 0.08), transparent 28rem),
+                radial-gradient(circle at 86% 26%, rgba(47, 86, 100, 0.1), transparent 30rem),
+                var(--paper);
+            color: var(--ink);
+            font-family: "Inter", system-ui, sans-serif;
+            line-height: 1.65;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: rgba(33, 31, 27, 0.018);
+            mix-blend-mode: multiply;
+            z-index: -1;
         }
 
         img {
@@ -50,271 +64,369 @@
         }
 
         a {
-            text-decoration: none;
+            color: inherit;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 0.24em;
         }
 
         .container {
-            width: min(92%, var(--max-width));
+            width: min(calc(100% - 2rem), var(--max-width));
             margin: 0 auto;
         }
 
-        /* ==========================
-           HEADER
-        ========================== */
-
-        header {
+        .site-header {
             position: sticky;
             top: 0;
-            z-index: 100;
-            background: rgba(236, 225, 201, 0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(81, 76, 52, 0.12);
+            z-index: 50;
+            background: rgba(246, 240, 228, 0.86);
+            border-bottom: 1px solid var(--line);
+            backdrop-filter: blur(18px);
         }
 
         nav {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
+            justify-content: space-between;
+            gap: 1.5rem;
+            padding: 0.9rem 0;
         }
 
         .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(1.45rem, 2vw, 1.9rem);
             font-weight: 700;
-            color: var(--espresso);
-            letter-spacing: 0.03em;
+            letter-spacing: 0.02em;
         }
 
         .nav-links {
             display: flex;
-            gap: 1.5rem;
+            gap: clamp(0.85rem, 2vw, 1.7rem);
+            color: var(--soft-ink);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
         }
 
         .nav-links a {
-            color: var(--olive-brown);
-            font-size: 0.95rem;
-            transition: var(--transition);
+            text-decoration: none;
+            transition: color var(--ease);
         }
 
-        .nav-links a:hover {
-            color: var(--terracotta);
+        .nav-links a:hover,
+        .nav-links a:focus-visible {
+            color: var(--wine);
         }
-
-        /* ==========================
-           HERO
-        ========================== */
 
         .hero {
-            padding: 6rem 0 4rem;
+            min-height: calc(100vh - 70px);
+            display: grid;
+            align-items: end;
+            padding: clamp(4rem, 9vw, 8rem) 0 clamp(3rem, 6vw, 5rem);
+            border-bottom: 1px solid var(--line);
         }
 
-        .hero-grid {
-            max-width: 760px;
+        .hero-inner {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.6fr);
+            gap: clamp(2rem, 6vw, 5rem);
+            align-items: end;
         }
 
-        .hero-text h1 {
-            font-family: 'Cormorant Garamond', serif;
-            color: var(--espresso);
-            font-size: clamp(3rem, 8vw, 6rem);
-            line-height: 0.95;
-            margin-bottom: 1rem;
+        .eyebrow {
+            color: var(--wine);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            margin-bottom: 1.4rem;
+            text-transform: uppercase;
         }
 
-        .hero-text p {
-            font-size: 1.1rem;
-            max-width: 650px;
-            margin-bottom: 2rem;
+        h1,
+        h2,
+        h3 {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        h1 {
+            max-width: 10ch;
+            font-size: clamp(4.5rem, 14vw, 10.5rem);
+        }
+
+        .hero-copy {
+            border-left: 1px solid var(--line);
+            padding-left: clamp(1rem, 3vw, 2rem);
+        }
+
+        .hero-copy p {
+            max-width: 34rem;
+            color: var(--soft-ink);
+            font-size: clamp(1.02rem, 1.5vw, 1.2rem);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.9rem 1.25rem;
+            align-items: center;
+            margin-top: 1.8rem;
+        }
+
+        .text-link {
+            color: var(--ink);
+            font-size: 0.84rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
         }
 
         .button {
-            display: inline-block;
-            background: var(--terracotta);
-            color: white;
-            padding: 0.9rem 1.5rem;
-            border-radius: 999px;
-            font-weight: 600;
-            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 2.9rem;
+            border: 1px solid var(--ink);
+            background: var(--ink);
+            color: var(--paper);
+            padding: 0.75rem 1.2rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: background var(--ease), color var(--ease), border-color var(--ease);
         }
 
-        .button:hover {
-            background: var(--mahogany);
-            transform: translateY(-2px);
+        .button:hover,
+        .button:focus-visible {
+            background: var(--wine);
+            border-color: var(--wine);
         }
 
-        /* ==========================
-           SECTIONS
-        ========================== */
+        .intro-strip {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: clamp(1.5rem, 5vw, 4rem);
+            align-items: start;
+            padding: clamp(3rem, 7vw, 5.5rem) 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .intro-strip p {
+            max-width: 42rem;
+            color: var(--soft-ink);
+            font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+        }
+
+        .small-note {
+            color: var(--moss);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
 
         section {
-            padding: 5rem 0;
+            padding: clamp(4rem, 8vw, 7rem) 0;
         }
 
-        .section-title {
-            margin-bottom: 2.5rem;
+        #gallery {
+            position: relative;
+            isolation: isolate;
+            background:
+                radial-gradient(circle at 18% 8%, rgba(163, 111, 43, 0.16), transparent 26rem),
+                radial-gradient(circle at 88% 42%, rgba(122, 38, 55, 0.08), transparent 28rem),
+                linear-gradient(180deg, rgba(216, 184, 143, 0.26), rgba(216, 184, 143, 0.1));
+            border-bottom: 1px solid var(--line);
         }
 
-        .section-title h2 {
-            font-family: 'Cormorant Garamond', serif;
-            color: var(--espresso);
-            font-size: clamp(2rem, 5vw, 3rem);
-        }
-
-        .section-title::after {
+        #gallery::before {
             content: "";
-            display: block;
-            width: 70px;
-            height: 2px;
-            background: var(--gold);
-            margin-top: 0.8rem;
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                repeating-linear-gradient(0deg, transparent 0 15px, var(--wood-line) 16px, transparent 19px),
+                linear-gradient(90deg, rgba(255, 246, 229, 0.22), transparent 30%, rgba(83, 47, 24, 0.06));
+            mix-blend-mode: multiply;
+            opacity: 0.45;
+            z-index: -1;
         }
 
-        /* ==========================
-           GALLERY
-        ========================== */
+        .section-heading {
+            display: grid;
+            grid-template-columns: minmax(0, 0.85fr) minmax(260px, 0.8fr);
+            gap: clamp(1.5rem, 5vw, 4rem);
+            align-items: end;
+            margin-bottom: clamp(2rem, 5vw, 4rem);
+        }
+
+        .section-heading h2 {
+            font-size: clamp(3rem, 8vw, 6.8rem);
+        }
+
+        .section-heading p {
+            color: var(--soft-ink);
+            max-width: 34rem;
+        }
 
         .gallery-grid {
             columns: 1;
-            column-gap: 1.25rem;
+            column-gap: 1rem;
         }
 
         .gallery-item {
+            display: block;
             position: relative;
-            margin-bottom: 1.25rem;
+            width: 100%;
+            margin-bottom: 1rem;
+            padding: 0;
             break-inside: avoid;
             cursor: pointer;
-            border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-hover);
+            background: #c9a679;
+            border: 1px solid rgba(76, 45, 25, 0.18);
+            appearance: none;
+            color: inherit;
+            font: inherit;
+            text-align: left;
         }
 
         .gallery-item img {
             width: 100%;
-            display: block;
+            filter: saturate(0.92) contrast(1.02);
+            transition: filter var(--ease), transform var(--ease);
+        }
+
+        .gallery-item:hover img,
+        .gallery-item:focus-within img {
+            filter: saturate(1.04) contrast(1.04);
+            transform: scale(1.025);
         }
 
         .gallery-overlay {
             position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                to top,
-                rgba(52, 43, 34, 0.85),
-                transparent
-            );
+            inset: auto 0 0;
             display: flex;
-            align-items: flex-end;
-            padding: 1.2rem;
+            align-items: end;
+            min-height: 48%;
+            padding: 1rem;
+            background: linear-gradient(to top, rgba(33, 31, 27, 0.76), transparent);
+            color: var(--paper);
             opacity: 0;
-            transition: var(--transition);
+            transition: opacity var(--ease);
         }
 
-        .gallery-item:hover .gallery-overlay {
+        .gallery-item:hover .gallery-overlay,
+        .gallery-item:focus-within .gallery-overlay {
             opacity: 1;
         }
 
-        .gallery-overlay h3 {
-            color: white;
-            font-size: 1rem;
-            font-weight: 500;
+        .gallery-title {
+            display: block;
+            font-family: "Inter", system-ui, sans-serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
         }
 
-        /* ==========================
-           ABOUT
-        ========================== */
-
-        .about-card {
-            background: rgba(255,255,255,0.45);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
+        .about {
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            background: rgba(231, 218, 198, 0.42);
         }
 
         .about-grid {
             display: grid;
+            grid-template-columns: minmax(220px, 0.42fr) minmax(0, 1fr);
+            gap: clamp(1.5rem, 5vw, 4rem);
+            align-items: center;
         }
 
-        .about-image img {
-            height: 100%;
+        .portrait {
+            border: 1px solid var(--line);
+            background: var(--paper);
+            padding: 0.45rem;
+        }
+
+        .portrait img {
+            aspect-ratio: 4 / 5;
+            height: auto;
             object-fit: cover;
         }
 
-        .about-content {
-            padding: 2rem;
+        .about-copy {
+            max-width: 760px;
         }
 
-        .about-content h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            color: var(--espresso);
-            margin-bottom: 1rem;
+        .about-copy h2 {
+            margin-bottom: 1.5rem;
+            font-size: clamp(3rem, 7vw, 6rem);
         }
 
-        /* ==========================
-           CONTACT
-        ========================== */
-
-        .contact-card {
-            background: rgba(255,255,255,0.45);
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-
-        form {
-            display: grid;
-            gap: 1rem;
-        }
-
-        input,
-        textarea {
-            width: 100%;
-            border: 1px solid rgba(81, 76, 52, 0.2);
-            border-radius: 12px;
-            padding: 1rem;
-            background: rgba(255,255,255,0.8);
-            font-family: inherit;
+        .about-copy p {
+            color: var(--soft-ink);
+            margin-top: 1rem;
             font-size: 1rem;
         }
 
-        textarea {
-            min-height: 180px;
-            resize: vertical;
+        .contact {
+            padding-bottom: clamp(3rem, 6vw, 5rem);
         }
 
-        button {
-            border: none;
-            cursor: pointer;
+        .contact-panel {
+            display: grid;
+            grid-template-columns: minmax(0, 0.72fr) minmax(320px, 0.88fr);
+            gap: clamp(1.5rem, 5vw, 4rem);
+            align-items: end;
+            border-top: 1px solid var(--line);
+            padding-top: clamp(3rem, 6vw, 5rem);
         }
 
-        /* ==========================
-           FOOTER
-        ========================== */
+        .contact h2 {
+            font-size: clamp(3rem, 8vw, 6.5rem);
+        }
+
+        .contact-copy {
+            color: var(--soft-ink);
+        }
+
+        .email-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--wine);
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(1.65rem, 3vw, 2.45rem);
+            line-height: 1.05;
+            white-space: nowrap;
+            overflow-wrap: anywhere;
+        }
 
         footer {
-            padding: 2rem 0;
-            text-align: center;
-            color: var(--olive-brown);
-            border-top: 1px solid rgba(81, 76, 52, 0.12);
+            border-top: 1px solid var(--line);
+            color: var(--soft-ink);
+            padding: 1.4rem 0;
+            font-size: 0.82rem;
         }
 
-        /* ==========================
-           LIGHTBOX
-        ========================== */
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
 
         .lightbox {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.92);
             display: none;
             justify-content: center;
             align-items: center;
             padding: 1rem;
+            background: rgba(12, 11, 10, 0.94);
             z-index: 1000;
         }
 
@@ -323,366 +435,329 @@
         }
 
         .lightbox-content {
-            max-width: 900px;
-            width: 100%;
+            width: min(100%, 940px);
             position: relative;
         }
 
         .lightbox img {
-            border-radius: 12px;
-            max-height: 80vh;
+            max-height: 78vh;
             object-fit: contain;
+            background: #111;
         }
 
         .lightbox-info {
-            color: white;
+            color: var(--paper);
             margin-top: 1rem;
+        }
+
+        .lightbox-info h3 {
+            font-size: 2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .lightbox-info p {
+            color: rgba(246, 240, 228, 0.78);
         }
 
         .close {
             position: absolute;
-            top: -50px;
             right: 0;
-            color: white;
-            font-size: 2rem;
+            top: -3rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            border: 1px solid rgba(246, 240, 228, 0.45);
+            background: transparent;
+            color: var(--paper);
             cursor: pointer;
+            font-size: 1.75rem;
+            line-height: 1;
         }
-
-        /* ==========================
-           RESPONSIVE
-        ========================== */
 
         @media (min-width: 700px) {
             .gallery-grid {
                 columns: 2;
             }
-
-            .about-grid {
-                grid-template-columns: 350px 1fr;
-            }
         }
 
-        @media (min-width: 1100px) {
+        @media (min-width: 1080px) {
             .gallery-grid {
                 columns: 3;
             }
         }
 
-        @media (max-width: 650px) {
+        @media (max-width: 760px) {
             .nav-links {
                 display: none;
             }
 
             .hero {
-                padding-top: 4rem;
+                min-height: auto;
             }
 
+            .hero-inner,
+            .intro-strip,
+            .section-heading,
+            .about-grid,
+            .contact-panel {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-copy {
+                border-left: 0;
+                border-top: 1px solid var(--line);
+                padding: 1.25rem 0 0;
+            }
+
+            .about-grid {
+                gap: 2rem;
+                align-items: start;
+            }
+
+            .portrait {
+                max-width: 18rem;
+            }
+
+            .email-link {
+                font-size: 1.55rem;
+                white-space: normal;
+            }
         }
     </style>
 </head>
 <body>
+    <header class="site-header">
+        <div class="container">
+            <nav aria-label="Primary navigation">
+                <a class="logo" href="#">Turning Turning Studio</a>
 
-<header>
-    <div class="container">
-        <nav>
-            <div class="logo">Turning Turning Studio</div>
+                <div class="nav-links">
+                    <a href="#gallery">Gallery</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
 
-            <div class="nav-links">
-                <a href="#gallery">Gallery</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
+    <main>
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="container hero-inner">
+                <div>
+                    <p class="eyebrow">Handmade jewelry from found color, old stories, and restless hands</p>
+                    <h1 id="hero-title">Turning Turning Studio</h1>
+                </div>
+
+                <div class="hero-copy">
+                    <p>
+                        Earrings with a little folklore in the bones: thrifted materials, strange color pairings,
+                        antique-feeling shapes, and enough brightness to keep the whole thing breathing.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a class="button" href="#gallery">View the Work</a>
+                        <a class="text-link" href="#about">Meet the Maker</a>
+                    </div>
+                </div>
             </div>
-        </nav>
-    </div>
-</header>
+        </section>
 
-<section class="hero">
-    <div class="container">
-        <div class="hero-grid">
-
-            <div class="hero-text">
-                <h1>Turning Turning Studio</h1>
-
+        <div class="container">
+            <div class="intro-strip">
+                <p class="small-note">Small batches, handmade</p>
                 <p>
-                    Handmade earrings inspired by nature, folklore,
-                    old gold, strange colors, and the occasional
-                    completely unhinged neon idea.
+                    Turning Turning pieces are made to feel collected rather than manufactured: a little romantic,
+                    a little peculiar, easy to wear, and never too polished to have a pulse.
                 </p>
-
-                <a href="#gallery" class="button">
-                    Browse Collection
-                </a>
             </div>
-
-        </div>
-    </div>
-</section>
-
-<section id="gallery">
-    <div class="container">
-
-        <div class="section-title">
-            <h2>Gallery</h2>
         </div>
 
-        <div class="gallery-grid">
+        <section id="gallery" aria-labelledby="gallery-title">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 id="gallery-title">Gallery</h2>
+                    <p>
+                        A living archive of finished pieces and favorite experiments. Click any piece to see it larger.
+                    </p>
+                </div>
 
-            <div class="gallery-item"
-                 data-title="Barbie Girl"
-                 data-description="For the days where only pink will do."
-                 data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/barbie.jpg">
-                <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/barbie.jpg" alt="">
-                <div class="gallery-overlay">
-                    <h3>Barbie Girl</h3>
+                <div class="gallery-grid">
+                    <button class="gallery-item" data-title="Barbie Girl" data-description="For the days where only pink will do." data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/barbie.jpg" type="button">
+                        <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/barbie.jpg" alt="Pink handmade earrings titled Barbie Girl">
+                        <span class="gallery-overlay"><span class="gallery-title">Barbie Girl</span></span>
+                    </button>
+
+                    <button class="gallery-item" data-title="Rosy Belt" data-description="Tender and funky all at once." data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/belt.jpg" type="button">
+                        <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/belt.jpg" alt="Handmade earrings titled Rosy Belt">
+                        <span class="gallery-overlay"><span class="gallery-title">Rosy Belt</span></span>
+                    </button>
+
+                    <button class="gallery-item" data-title="Vampire's Chess" data-description="Wear these when you play chess with Dracula." data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/chess.jpg" type="button">
+                        <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/chess.jpg" alt="Checkered handmade earrings titled Vampire's Chess">
+                        <span class="gallery-overlay"><span class="gallery-title">Vampire's Chess</span></span>
+                    </button>
+
+                    <button class="gallery-item" data-title="Alchemy" data-description="Turn copper into gold." data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/copper.jpg" type="button">
+                        <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/copper.jpg" alt="Copper and gold handmade earrings titled Alchemy">
+                        <span class="gallery-overlay"><span class="gallery-title">Alchemy</span></span>
+                    </button>
+
+                    <button class="gallery-item" data-title="Flowers" data-description="Mix and match flowers." data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/flowers.jpg" type="button">
+                        <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/flowers.jpg" alt="Floral handmade earrings titled Flowers">
+                        <span class="gallery-overlay"><span class="gallery-title">Flowers</span></span>
+                    </button>
+
+                    <button class="gallery-item" data-title="Champagne" data-description="They go best with champagne." data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/gold.jpg" type="button">
+                        <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/gold.jpg" alt="Gold handmade earrings titled Champagne">
+                        <span class="gallery-overlay"><span class="gallery-title">Champagne</span></span>
+                    </button>
+
+                    <button class="gallery-item" data-title="Too much?" data-description="You're never too much." data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/neon.jpg" type="button">
+                        <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/neon.jpg" alt="Neon handmade earrings titled Too much?">
+                        <span class="gallery-overlay"><span class="gallery-title">Too much?</span></span>
+                    </button>
+
+                    <button class="gallery-item" data-title="Ocean Sanddollars" data-description="If sand dollars were made of gold." data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/ocean.jpg" type="button">
+                        <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/ocean.jpg" alt="Ocean-inspired handmade earrings titled Ocean Sanddollars">
+                        <span class="gallery-overlay"><span class="gallery-title">Ocean Sanddollars</span></span>
+                    </button>
+
+                    <button class="gallery-item" data-title="Quilt Samples" data-description="Converted from vintage quilting swatches." data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/quilts.png" type="button">
+                        <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/quilts.png" alt="Quilt-inspired handmade earrings titled Quilt Samples">
+                        <span class="gallery-overlay"><span class="gallery-title">Quilt Samples</span></span>
+                    </button>
+
+                    <button class="gallery-item" data-title="Prism" data-description="See rainbows through the prism." data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/rainbow.jpg" type="button">
+                        <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/rainbow.jpg" alt="Rainbow handmade earrings titled Prism">
+                        <span class="gallery-overlay"><span class="gallery-title">Prism</span></span>
+                    </button>
+
+                    <button class="gallery-item" data-title="Seventies Carpet" data-description="Just like your grandma wore." data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/seventies.jpg" type="button">
+                        <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/seventies.jpg" alt="Warm patterned handmade earrings titled Seventies Carpet">
+                        <span class="gallery-overlay"><span class="gallery-title">Seventies Carpet</span></span>
+                    </button>
+
+                    <button class="gallery-item" data-title="Swish" data-description="Sass level goes up with every dramatic head turn." data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/triangle.jpg" type="button">
+                        <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/triangle.jpg" alt="Triangle handmade earrings titled Swish">
+                        <span class="gallery-overlay"><span class="gallery-title">Swish</span></span>
+                    </button>
                 </div>
             </div>
+        </section>
 
-            <div class="gallery-item"
-                 data-title="Rosy Belt"
-                 data-description="Tender and funky all at once."
-                 data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/belt.jpg">
-                <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/belt.jpg" alt="">
-                <div class="gallery-overlay">
-                    <h3>Rosy Belt</h3>
-                </div>
-            </div>
+        <section class="about" id="about" aria-labelledby="about-title">
+            <div class="container about-grid">
+                <figure class="portrait">
+                    <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/main/images/headshot.png" alt="Daisy, the maker behind Turning Turning Studio">
+                </figure>
 
-            <div class="gallery-item"
-                 data-title="Vampire's Chess"
-                 data-description="Wear these when you play chess with Dracula."
-                 data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/chess.jpg">
-                <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/chess.jpg" alt="">
-                <div class="gallery-overlay">
-                    <h3>Vampire's Chess</h3>
-                </div>
-            </div>
-
-            <div class="gallery-item"
-                 data-title="Alchemy"
-                 data-description="Turn copper into gold."
-                 data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/copper.jpg">
-                <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/copper.jpg" alt="">
-                <div class="gallery-overlay">
-                    <h3>Alchemy</h3>
-                </div>
-            </div>
-
-            <div class="gallery-item"
-                 data-title="Flowers"
-                 data-description="Mix and match flowers."
-                 data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/flowers.jpg">
-                <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/flowers.jpg" alt="">
-                <div class="gallery-overlay">
-                    <h3>Flowers</h3>
-                </div>
-            </div>
-
-            <div class="gallery-item"
-                 data-title="Champagne"
-                 data-description="They go best with champagne."
-                 data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/gold.jpg">
-                <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/gold.jpg" alt="">
-                <div class="gallery-overlay">
-                    <h3>Champagne</h3>
-                </div>
-            </div>
-
-                        <div class="gallery-item"
-                 data-title="Too much?"
-                 data-description="You're never too much."
-                 data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/neon.jpg">
-                <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/neon.jpg" alt="">
-                <div class="gallery-overlay">
-                    <h3>Too much?</h3>
-                </div>
-            </div>
-
-                        <div class="gallery-item"
-                 data-title="Ocean Sanddollars"
-                 data-description="If Sanddollars were made of gold."
-                 data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/ocean.jpg">
-                <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/ocean.jpg" alt="">
-                <div class="gallery-overlay">
-                    <h3>Ocean Sanddollars</h3>
-                </div>
-            </div>
-
-                        <div class="gallery-item"
-                 data-title="Quilt Samples"
-                 data-description="Converted from vintage quilting swatches."
-                 data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/quilts.png">
-                <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/quilts.png" alt="">
-                <div class="gallery-overlay">
-                    <h3>Quilt Samples</h3>
-                </div>
-            </div>
-
-                                    <div class="gallery-item"
-                 data-title="Prism"
-                 data-description="See rainbows through the prism."
-                 data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/rainbow.jpg">
-                <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/rainbow.jpg" alt="">
-                <div class="gallery-overlay">
-                    <h3>Prisml</h3>
-                </div>
-            </div>
-
-                                    <div class="gallery-item"
-                 data-title="Seventies Carpet"
-                 data-description="Just like your grandma wore."
-                 data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/seventies.jpg">
-                <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/seventies.jpg" alt="">
-                <div class="gallery-overlay">
-                    <h3>Seventies Carpet</h3>
-                </div>
-            </div>
-
-                                    <div class="gallery-item"
-                 data-title="Swish"
-                 data-description="Sass level goes up with every dramatic head turn."
-                 data-image="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/triangle.jpg">
-                <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/test/images/triangle.jpg" alt="">
-                <div class="gallery-overlay">
-                    <h3>Swish</h3>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<section id="about">
-    <div class="container">
-
-        <div class="section-title">
-            <h2>About the Artist</h2>
-        </div>
-
-        <div class="about-card">
-            <div class="about-grid">
-
-                <div class="about-image">
-                    <img src="https://raw.githubusercontent.com/TurningTurningStudio/jewelry/refs/heads/main/images/headshot.png" alt="Artist portrait">
-                </div>
-
-                <div class="about-content">
-                    <h3>Hello!</h3>
+                <div class="about-copy">
+                    <p class="small-note">About the artist</p>
+                    <h2 id="about-title">Hello, I’m Daisy.</h2>
 
                     <p>
-Hi, I’m Daisy, the maker behind Turning Turning Studio.</p>
+                        I’m the maker behind Turning Turning Studio. I create handmade earrings because I can’t keep my
+                        hands still, and because I genuinely believe creating things is part of how we stay human.
+                    </p>
 
-<br>I create handmade earrings because I can’t keep my hands still, and because I genuinely believe creating things is part of how we stay human. I design pieces I would wear myself—bold, quirky, colorful. Whenever possible, I thrift my supplies from local reuse stores, both to reduce environmental impact and to challenge myself creatively by working with what already exists.</br>
+                    <p>
+                        I design pieces I would wear myself: bold, quirky, colorful. Whenever possible, I thrift my
+                        supplies from local reuse stores, both to reduce environmental impact and to challenge myself
+                        creatively by working with what already exists.
+                    </p>
 
-<br>I also believe the body is a space we get to live in fully and personally. It’s ours to adorn, customize, and celebrate without apology. Making jewelry I would wear myself, and imagining it out in the world on others, is one of the most rewarding parts of what I do.</br>
+                    <p>
+                        I also believe the body is a space we get to live in fully and personally. It’s ours to adorn,
+                        customize, and celebrate without apology. Making jewelry I would wear myself, and imagining it
+                        out in the world on others, is one of the most rewarding parts of what I do.
+                    </p>
 
-<br>My work is informed by beadwork traditions across many cultures and histories, including techniques that are also present in Indigenous beadwork traditions in North America. I am not Native, and I approach these influences with respect for their origins, ongoing living cultures, and the realities of appropriation within craft spaces. I’m committed to continuing to learn, listen, and be thoughtful about how I engage with these techniques and histories.</br>
+                    <p>
+                        My work is informed by beadwork traditions across many cultures and histories, including
+                        techniques also present in Indigenous beadwork traditions in North America. I am not Native, and
+                        I approach these influences with respect for their origins, ongoing living cultures, and the
+                        realities of appropriation within craft spaces.
+                    </p>
 
-<br>Turning Turning Studio is always open to learning, creating, and crafting.</br>
+                    <p>
+                        Turning Turning Studio is always open to learning, creating, and crafting.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact" id="contact" aria-labelledby="contact-title">
+            <div class="container contact-panel">
+                <div>
+                    <p class="small-note">Questions, commissions, kind notes</p>
+                    <h2 id="contact-title">Get in touch.</h2>
                 </div>
 
+                <div class="contact-copy">
+                    <p>
+                        For availability, custom ideas, or anything else you want to ask, send a note here:
+                    </p>
+                    <a class="email-link" href="mailto:turningturningstudio@gmail.com">turningturningstudio@gmail.com</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-inner">
+            <span>© 2026 Turning Turning Studio</span>
+            <span>Handmade in small batches</span>
+        </div>
+    </footer>
+
+    <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Gallery image preview">
+        <div class="lightbox-content">
+            <button class="close" type="button" aria-label="Close preview">&times;</button>
+            <img id="lightboxImage" src="" alt="">
+
+            <div class="lightbox-info">
+                <h3 id="lightboxTitle"></h3>
+                <p id="lightboxDescription"></p>
             </div>
         </div>
-
-    </div>
-</section>
-
-<section id="contact">
-    <div class="container">
-
-        <div class="section-title">
-            <h2>Contact</h2>
-        </div>
-
-        <div class="contact-card">
-            Questions? Email us at <a href="mailto:turningturningstudio@gmail.com">turningturningstudio@gmail.com</a>.
-
-            <!-- Replace form action later -->
-            <!-- <form>
-
-                <input
-                    type="text"
-                    placeholder="Your Name"
-                >
-
-                <input
-                    type="email"
-                    placeholder="Email Address"
-                >
-
-                <textarea
-                    placeholder="Message"></textarea>
-
-                <button
-                    type="submit"
-                    class="button">
-                    Send Message
-                </button>
-
-            </form> -->
-
-        </div>
-
-    </div>
-</section>
-
-<footer>
-    <div class="container">
-        © 2026 Turning Turning Studio
-    </div>
-</footer>
-
-<div class="lightbox" id="lightbox">
-
-    <div class="lightbox-content">
-
-        <span class="close">&times;</span>
-
-        <img id="lightboxImage" src="" alt="">
-
-        <div class="lightbox-info">
-            <h3 id="lightboxTitle"></h3>
-            <p id="lightboxDescription"></p>
-        </div>
-
     </div>
 
-</div>
+    <script>
+        const galleryItems = document.querySelectorAll(".gallery-item");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImage = document.getElementById("lightboxImage");
+        const lightboxTitle = document.getElementById("lightboxTitle");
+        const lightboxDescription = document.getElementById("lightboxDescription");
+        const closeButton = document.querySelector(".close");
 
-<script>
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightboxImage');
-    const lightboxTitle = document.getElementById('lightboxTitle');
-    const lightboxDescription = document.getElementById('lightboxDescription');
-    const closeButton = document.querySelector('.close');
-
-    galleryItems.forEach(item => {
-        item.addEventListener('click', () => {
-
-            lightboxImage.src = item.dataset.image;
-            lightboxTitle.textContent = item.dataset.title;
-            lightboxDescription.textContent = item.dataset.description;
-
-            lightbox.classList.add('active');
+        galleryItems.forEach((item) => {
+            item.addEventListener("click", () => {
+                lightboxImage.src = item.dataset.image;
+                lightboxImage.alt = item.querySelector("img").alt;
+                lightboxTitle.textContent = item.dataset.title;
+                lightboxDescription.textContent = item.dataset.description;
+                lightbox.classList.add("active");
+                closeButton.focus();
+            });
         });
-    });
 
-    closeButton.addEventListener('click', () => {
-        lightbox.classList.remove('active');
-    });
-
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-            lightbox.classList.remove('active');
+        function closeLightbox() {
+            lightbox.classList.remove("active");
+            lightboxImage.src = "";
         }
-    });
 
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            lightbox.classList.remove('active');
-        }
-    });
-</script>
+        closeButton.addEventListener("click", closeLightbox);
 
+        lightbox.addEventListener("click", (event) => {
+            if (event.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                closeLightbox();
+            }
+        });
+    </script>
 </body>
 </html>
